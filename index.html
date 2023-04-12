@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Introduction au logiciel de cartographie thématique Magrit</title>
+	<meta name="description" content="Introduction au logiciel de cartographie thématique Magrit">
+	<meta name="author" content="Matthieu Viry">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+	<link rel="stylesheet" href="plugin/chalkboard/style.css">
+	<link rel="stylesheet" href="plugin/customcontrols/style.css">
+	<link rel="stylesheet" href="css/http_cdn.jsdelivr.net_npm_reveal.js-plugins_menu_font-awesome_css_fontawesome.css">
+	<style>
+		.valign-middle, .valign-middle > * {
+			vertical-align: middle;
+		}
+		.footer-intro {
+			background-color: white;
+			position: absolute;
+			width: 100%;
+			color: rgb(2, 2, 90);
+			font-weight: 600;
+			padding: 20px;
+			display: flex;
+			justify-content: space-between;
+			bottom: 0;
+		}
+		.footer-intro > * {
+			margin: auto !important;
+		}
+		.reveal .controls {
+			bottom: 0px;
+			right: 8px;
+		}
+
+		:root {
+			--r-main-font-size: 38px;
+		}
+		h3, h4, h5 {
+			text-transform: none !important;
+		}
+		.light-small {
+			font-size: 0.75em;
+		}
+		.ta-left {
+			text-align: left;
+		}
+		.ta-right {
+			text-align: right;
+		}
+	</style>
+</head>
+<body>
+	<div class="reveal">
+		<div class="footer-intro">
+			<small>Timothée Giraud, Nicolas Lambert, Matthieu Viry, Ronan Ysebaert</small> <img src="images/logos-footer.png" width="400px" >
+		</div>
+		<div class="slides">
+			<section data-markdown data-fullscreen>
+				<textarea data-template>
+				<a href="https://magrit.cnrs.fr" target="_blank">
+					<img src="images/magrit_banner-crop.png" alt="Magrit logo" style="width: 100%; margin: 0 auto 4rem auto; background: transparent;" class="demo-logo">
+				</a>
+
+				## Introduction au logiciel
+				## de cartographie thématique <a href="https://magrit.cnrs.fr" target="_blank">Magrit</a>
+				
+				<br>
+
+				12 avril 2023 - Campus Condorcet (Aubervilliers)
+
+
+				</textarea>
+			</section>
+			<section data-markdown>
+				<textarea data-template>
+				## Magrit... pour faire quoi ?
+
+				--
+
+				<h3 style="display: none;">Fonctionnalités cartographiques</h3>
+				<img src="images/magrit-functions.png">
+
+				--
+				<h3 style="display: none;">Chaîne de traitement cartographique</h3>
+				<img src="images/magrit-functions2.png" style="width: 650px">
+
+				--
+
+				<h3 style="display: none;">Exemples de cartes</h3>
+				<img src="images/carte-typo-eu.png" style="width: 400px; float: left;">
+
+				<img src="images/carte-co2.png" style="width: 550px; float: right;">
+
+				<img src="images/carte-cinema-pot.png" style="width: 400px; float: left;">
+
+				</textarea>
+			</section>
+
+			<section data-markdown>
+				<textarea data-template>
+				## Magrit - ses points forts
+
+				<div class="light-small">
+
+				- **Simplicité d'utilisation** (application Web sans installation nécessaire, préparation d'une carte en 2 minutes)
+
+				- **Différents formats de données en entrée** (CSV, ESRI Shapefile, GeoJSON, GML, etc.)
+
+				- **Personnalisation des cartes** (habillage, légende, etc.)
+
+				- Nombreuses **projections cartographiques** supportées
+
+				- **Export SVG** permettant de retoucher les cartes produites (Inkscape, Illustrator, etc.)
+
+				- Sauvegarde d'un fichier projet permettant de reprendre le travail ultérieurement
+
+				</div>
+
+				--
+
+				## Magrit - ses limites
+
+				<div class="light-small">
+
+				- Pas un SIG (pas de géotraitements - pas ou de modifications des données)
+
+				- Pas d'analyses statistiques multivariées (régression, etc.)
+
+				- Pas de digitalisation
+
+				- Nécessité d'utiliser de l'information géographique (données spatialisées) → Pas d'utilisation de fond de carte .svg / .ai
+
+				</div>
+				</textarea>
+			</section>
+
+			<section data-markdown>
+				<textarea data-template>
+				## Démo
+
+				<p class="ta-left"><b>Données</b></p>
+
+				- [Découpage des quartiers de Paris (GeoJSON)](data/demo/quartier_paris.geojson)
+
+				- [Données de Population (CSV)](data/demo/quartier_paris_pop.csv)
+
+				<br>
+
+				<p class="ta-left"><b>Objectif</b></p>
+
+				- Importer et joindre les données
+
+				- Calculer un nouveau champ
+
+				- Combiner plusieurs représentations
+
+				- Exporter la carte
+
+				<aside class="notes">
+					📝
+					<ul>
+					<li>Ajout geojson</li>
+					<li>Choix Lambert 93</li>
+					<li>Ajout CSV données + jointures</li>
+					<li>Représentation Symbols proportionnels sur champ population 2012</li>
+					<li>Calcul champ densité_pop_2012</li>
+					<li>Représentation choroplèthe sur densité pop 2012</li>
+					<li>Modification de la légende pour layout horizontal</li>
+					<li>Représentation anamorphose, puis la cacher</li>
+					<li>Ajout d'éléments d'habillage : échelle et nord</li>
+					<li>Ajout d'un titre</li>
+					<li>Export en SVG</li>
+					<li>Montrer export en geojson du résultat de l'anamorphose ?</li>
+					</ul>
+				</aside>
+				</textarea>
+			</section>
+			<section data-markdown>
+				<textarea data-template>
+				## Exercice 1
+
+				- **Objectifs** : Porter une analyse critique sur une carte existante puis chercher à la reproduire avec Magrit
+
+				<img src="images/carte_uefa.png" style="width: 50%">
+
+				--
+
+				<img src="images/carte_uefa.png" style="width: 690px">
+
+				--
+
+				<div class="ta-left"><p><b>Source de données pour les fonds de carte à l'échelle du globe</b> :</p>
+
+				
+				- http://naturalearthdata.com/ (trouver le bon fond de carte : niveau de détails, présence des 50 pays concernés par le jeu de données, etc.)
+				
+				<br><br><img src="images/screenshot-wikipedia_uefa.png" style="float: right; width: 320px;"/>
+				
+
+				<p><b>Données des victoires par pays</b> :</p>
+
+				- [data_uefa.csv](data/ex1/data_uefa.csv) 
+
+				<div style="width: 50%;"><small>Source: <a href="https://fr.wikipedia.org/wiki/Ligue_des_champions_de_l%27UEFA">Wikipedia - Ligue des champions de l'UEFA</a></small></div>
+
+				</div>
+
+				--
+
+				### Exemple de résultat
+
+				<img src="./images/uefa.png" style="width: 720px; background-color: white;">
+
+
+				</textarea>
+			</section>
+			<section data-markdown>
+				<textarea data-template>
+				## Exercice 2
+
+				<div class="light-small">
+
+				- **Objectif thématique** : Faire une carte de l'évolution 1968-2019 de la population de France Métropolitaine
+
+				- **Objectifs techniques** :  Réaliser une carte choroplèthe, choisir une méthode de discrétisation et une palette de couleurs adaptée.
+
+				- **Données** :
+
+					- Fond de carte des départements (disponible dans Magrit)
+
+					- Données de population par département (source: INSEE) - https://www.insee.fr/fr/statistiques/1893204
+
+				
+				</div>
+				
+				--
+
+				### Étapes à suivre
+
+				<div class="light-small">
+
+				- **Étape 1** : Calculer la variable à représenter à partir du tableur de l'INSEE et exporter la table en CSV
+
+				- **Étape 2** : Importer les données CSV dans Magrit
+
+				- **Étape 3** : Importer le fond de carte des départements de France Métropolitaine dans Magrit
+
+				- **Étape 4** : Faire les bons choix de sémiologie et d'habillage jusqu'à l'obtention d'une carte finalisée
+
+				</div>
+
+				--
+
+				### Exemple de résultat
+				
+				<img src="./images/evo-pop-fr-metropolitaine.png" style="width: 650px; background-color: white;">
+
+
+				</textarea>
+			</section>
+			<section data-markdown>
+				<textarea data-template>
+				## Exercice 3
+
+				<div class="light-small">
+
+				- **Objectif thématique** : Analyser la structure de l'emploi dans la région Hauts-de-France en 2014.
+
+				- **Objectifs techniques** : Combiner plusieurs modes de représentation sur une même carte et mettre en œuvre des représentation cartographiques avancées
+
+				- **Données** :
+
+					- [Fond de carte des communes de la région Hauts-de-France](data/ex3/Communes_Region.zip) (source : IGN)
+
+					- [Fond de carte des départements de la région Hauts-de-France](data/ex3/departements.zip) (source : IGN)
+
+					- [Structure de la population active de 25 à 54 ans par commune](data/ex3/) (source : INSEE)
+
+				<small><i>NB : les données ont été mises en forme avec R pour être importées dans Magrit (extrait des communes des Hauts-de-France et calcul des ratios et de la catégorie dominante)</i></small>
+
+				</div>
+				--
+
+				<div class="light-small">
+				
+				### Étapes à suivre
+
+				- **Étape 1** : Importer toutes les données dans Magrit et réaliser la jointure
+
+				- **Étape 2** : Choisir la ou les représentations appropriées
+
+				- **Étape 3** : Habiller la carte _(choix d'un titre, modification des légendes, ajout de labels, ajout du nom de l'auteur et des sources, d'un logo, etc.)_
+
+				- **Étape 4** : Exporter la carte _(SVG ou PNG)_
+
+				</div>
+
+				--
+
+				### Exemple de résultat
+
+				<img src="./images/hauts-de-france-pop-emploi.png" style="width: 800px; background-color: white;">
+
+				</textarea>
+			</section>
+			<section data-markdown>
+				<textarea data-template>
+				## Conseils pour une utilisation avancée de Magrit
+
+				</textarea>
+			</section>
+			<section data-markdown>
+				<textarea data-template>
+
+				## Options pour l'habillage de la carte
+
+				--
+
+				### Ajouter une ombre à une couche
+
+				<img src="images/fr-dep1.png" style="display: inline-block;width:39%;">
+			
+				<img src="images/fr-dep2.png" style="display: inline-block;width:39%;">
+
+				--
+
+				<img src="images/panneau-propriete-couche.png" style="display: inline-block;width:40%;">
+
+			
+				
+				--
+
+				### Aligner précisément les éléments d'habillage
+
+				--
+
+				<h3 style="display:none;">Aligner précisément les éléments d'habillage (suite)</h3>
+				<img src="images/alignement1.png">
+
+				--
+
+				<h3 style="display:none;">Aligner précisément les éléments d'habillage (suite)</h3>
+
+				Après activation de la fonctionnalité, des guides rouges apparaissent lors du déplacement des éléments pour guider leur
+				alignement les uns par rapport aux autres (*"à la Powerpoint"*)
+
+				<img src="images/alignement0.png" style="background-color: white; width: 130px;">
+
+				--
+
+				<h3 style="display:none;">Aligner précisément les éléments d'habillage (suite)</h3>
+
+				<img src="images/alignement2.png">
+
+				--
+
+				<h3 style="display:none;">Aligner précisément les éléments d'habillage (suite)</h3>
+
+				<img src="images/alignement3.png">
+
+				--
+
+				### Ajouter un contour autour du texte
+
+				<small><em>Pour améliorer la lisibilité de certains textes<br>(sur un fond sombre, lors du chevauchement de certaines portions du fond de carte, etc.).</em></small>
+
+				<div class="fragment">
+				<img src="images/ombre_texte_export.png" style="float:left;width: 49%;">
+				<img src="images/ombre_texte_export2.png" style="float: right;width: 49%;">
+				</div>
+
+				<small class="fragment"><em>Disponible sur l'élément "titre", sur l'élément "annotation de texte" et sur les couches de labels.</em></small>
+
+				</textarea>
+			</section>
+			<section data-markdown data-fullscreen>
+				<textarea data-template>
+				
+
+				## Ajouter un carton de localisation
+
+				<img src="images/carton-only.png">
+				--
+
+				<h3 style="display:none;">Ajouter un carton de localisation (suite)</h3>
+
+				<img src="images/carton1.png" style="width: 90%;">
+
+				--
+
+				<h3 style="display:none;">Ajouter un carton de localisation (suite)</h3>
+
+				<img src="images/carton.gif">
+
+
+				</textarea>
+			</section>
+			<section data-markdown>
+				<textarea data-template>
+
+				## Options pour la personnalisation des éléments de légende
+				
+				
+				--
+
+				<h3 style="display:none;">Options pour la personnalisation des éléments de légende (suite)</h3>
+
+				**Options disponibles :**
+
+				- Arrondir ou choisir les valeurs affichées
+				- Choisir la disposition (horizontale-verticale / symboles encastrés ou non)
+				- Personnaliser le texte affiché
+				- ...
+
+
+				--
+
+				<h3 style="display:none;">Options pour la personnalisation des éléments de légende (suite)</h3>
+
+				**Pourquoi se limiter aux possibilités offertes par les options de la légende ?**
+
+				**Il est par exemple possible d'utiliser une annotation de texte avec une police personnalisée**
+
+				<img src="images/legende_custom2.png" style="width: 30%;">
+
+				</textarea>
+			</section>
+			<section data-markdown>
+				<textarea data-template>
+
+				## Plus d'astuces ?
+				
+				
+				</textarea>
+			</section>
+			<section data-markdown>
+				<textarea data-template>
+
+				## Installer Magrit ?
+				
+				- Pour l'utiliser sans internet
+
+				- Pour traiter des données sensibles en local
+
+				- Pour bénéficier de meilleures performances
+
+				- L'installer sur un *Raspberry Pi* pour enseigner la cartographie à une classe sans accès au Web ?
+
+				<div class="fragment">
+				<img src="images/Raspberry_Pi_4_Model_B_-_Side.jpg" style="width: 300px; float:left;">
+				<img src="images/docker-hub-magrit-multi.png" style="width: 600px; float:right;">
+				</div>
+
+				--
+
+				### Installer Magrit avec Docker
+
+				<img src="images/DOCKER_LOGO_CC.png" style="width: 200px;">
+
+				- **Compatibilité** : Tous les OS qui supportent Docker (Windows, Mac, Linux, etc.)
+
+				- **Prérequis** : Docker installé sur votre machine
+
+				--
+
+				### Installer Magrit avec Docker (suite)
+
+				- **En ligne de commande (option 1)** : <br>
+
+					- Lors de la première utilisation (téléchargement de l'image et démarrage) :
+
+							docker run -d -p "9999:9999" --name magrit magrit/magrit
+
+					- Pour l'arrêter :
+
+							docker stop magrit
+
+					- Pour le redémarrer :
+
+							docker start magrit
+
+				--
+
+				### Installer Magrit avec Docker (suite)
+
+				- **En utilisant le GUI Docker Desktop (option 2)** :
+
+				<img src="images/docker-desktop-ui.png" style="width: 800px"/>
+				--
+
+				<img src="images/docker-desktop-search-magrit.png" style="width: 800px"/>
+
+				<small>*Chercher "Magrit" dans la barre de recherche, sélectionner l'image __magrit/magrit__ et cliquer sur __Pull__*.</small>
+
+				--
+
+				<img src="images/docker-desktop-images.png" style="width: 800px"/>
+
+				<small>*Dans le menu __Images__, cliquer sur le bouton* ▶️ *de l'image __magrit/magrit__*.</small>
+
+				--
+
+				<img src="images/docker-desktop-run-options.png" style="width: 800px"/>
+
+				<small>*Renseigner le port sur lequel l'application doit être exposée (par exemple 9999)*.</small>
+
+				--
+
+				### Accéder à Magrit...
+
+				<br><br>
+
+				😎 **_Simplement en ouvrant votre navigateur à l'adresse http://localhost:9999/_**
+
+				<br>
+
+				<img src="images/screenshot-magrit-local.png" />
+
+				--
+
+				*Il est ensuite possible de stopper ou de redémarrer l'application depuis le menu __Containers__ de Docker Desktop.*
+
+				<img src="images/docker-desktop-containers.png" style="width: 800px"/>
+				</textarea>
+			</section>
+			<section data-markdown>
+				<textarea data-template>
+
+				## Pour résumer ...
+
+				- Une application de cartographie thématique en ligne, gratuite et libre
+
+				- Capable et polyvalente
+
+				- Maintenue (en ligne depuis 2017) et améliorée régulièrement
+
+				</textarea>
+			</section>
+			<section data-markdown data-fullscreen>
+				<textarea data-template>
+
+				#### Merci pour votre attention !
+
+				<br/>
+				<a href="https://magrit.cnrs.fr" target="_blank">
+					<img src="images/magrit_banner-crop.png" alt="Magrit logo" style="width: 100%; margin: 0 auto 4rem auto; background: transparent;" class="demo-logo">
+				</a>
+
+				🐛 Rapport de bug, suggestions : https://github.com/riatelab/magrit/issues
+
+				<br>
+
+				📧 Contact : matthieu.viry@cnrs.fr
+				</textarea>
+			</section>
+
+		</div>
+	</div>
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/zoom/zoom.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/search/search.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/menu/menu.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script src="plugin/chalkboard/plugin.js"></script>
+	<script src="plugin/customcontrols/plugin.js"></script>
+	<script src="plugin/fullscreen/plugin.js"></script>
+	<script>
+		document.querySelectorAll('section[data-markdown]')
+			.forEach((elem) => {
+				elem.setAttribute('data-separator-vertical', '--\n');
+			});
+
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			center: true,
+			hash: true,
+			plugins: [
+				RevealZoom,
+				RevealNotes,
+				RevealSearch,
+				RevealMarkdown,
+				RevealHighlight,
+				RevealMenu,
+				RevealChalkboard,
+				RevealCustomControls,
+				RevealFullscreen,
+			],
+			customcontrols: {
+				controls: [	
+					{ icon: '<i class="fa fa-pen-square"></i>',
+					title: 'Toggle chalkboard (B)',
+					action: 'RevealChalkboard.toggleChalkboard();'
+					},
+					{ icon: '<i class="fa fa-pen"></i>',
+					title: 'Toggle notes canvas (C)',
+					action: 'RevealChalkboard.toggleNotesCanvas();'
+					}
+				]
+			},
+		});
+
+		Reveal.addEventListener( 'slidechanged', function(event) {
+			const displayValue = (event.indexh === 0 && event.indexv === 0)
+				? null
+				: 'none';
+			document.querySelector('.footer-intro').style.display = displayValue;
+		});
+
+	</script>
+
+</body>
+</html>
